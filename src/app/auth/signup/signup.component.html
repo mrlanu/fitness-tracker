@@ -30,6 +30,9 @@
 
     <mat-form-field>
       <input
+        ngModel
+        name="birthdate"
+        required
         matInput
         placeholder="Your birthdate"
         [matDatepicker]="picker"
@@ -40,6 +43,13 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+
+      <mat-checkbox
+        labelPosition="before"
+        color="primary"
+        ngModel
+        name="agree"
+        required>Agree to Terms and Conditions.</mat-checkbox>
 
     <button
       type="submit"
