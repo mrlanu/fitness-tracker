@@ -1,19 +1,22 @@
 <section class="signup-form">
 
-  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <form fxLayout="column"
+        fxLayoutAlign="center center"
+        fxLayoutGap="15px"
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()">
 
     <mat-form-field>
       <input
         type="email"
         matInput
         placeholder="Your email"
-        ngModel
         name="email"
         email
         required
-        #emailInput="ngModel">
-      <mat-error *ngIf="!emailInput.hasError('required')">E-mail is invalid.</mat-error>
-      <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty.</mat-error>
+        formControlName="email">
+      <mat-hint>Please enter a valid email.</mat-hint>
+      <mat-error>Invalid or missing email.</mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -21,17 +24,17 @@
         type="password"
         matInput
         placeholder="Your password"
-        ngModel
         name="password"
-        required
-        #pwInput="ngModel">
+        formControlName="password">
+      <mat-hint>Please enter your password.</mat-hint>
+      <mat-error>Missing password.</mat-error>
     </mat-form-field>
 
     <button
       type="submit"
       mat-raised-button
       color="primary"
-      [disabled]="f.invalid">Submit</button>
+      [disabled]="loginForm.invalid">Submit</button>
 
   </form>
 
