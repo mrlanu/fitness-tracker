@@ -1,4 +1,6 @@
 import {Exercise} from './exercise.model';
+import {EventEmitter, Output} from '@angular/core';
+import {Subject} from 'rxjs';
 
 export class TrainingService{
   private availableExercises: Exercise[] = [
@@ -8,7 +10,16 @@ export class TrainingService{
     { id: 'burpees', name: 'Burpees', duration: 60, calories: 8 }
   ];
 
+  private runningExercise: Exercise;
+
+  exerciseChanged = new Subject<Exercise>();
+
   getAvailableExercises(){
     return this.availableExercises.slice();
+  }
+
+  startExercise(selectedId: string){
+    this.runningExercise = this.availableExercises.find(ex => ex.id === selectedId);
+    this.exerciseChanged.next({...this.runningExercise});
   }
 }
